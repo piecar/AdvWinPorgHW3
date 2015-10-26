@@ -7,3 +7,12 @@ C:\Users\piecar\Documents\FIU Classes\Adv Windows Prog\AdvWinPorgHW3\AdvWinPorgH
 C:\Users\piecar\Documents\FIU Classes\Adv Windows Prog\AdvWinPorgHW3\AdvWinPorgHW3\obj\Debug\AdvWinPorgHW3.csproj.GenerateResource.Cache
 C:\Users\piecar\Documents\FIU Classes\Adv Windows Prog\AdvWinPorgHW3\AdvWinPorgHW3\obj\Debug\AdvWinPorgHW3.exe
 C:\Users\piecar\Documents\FIU Classes\Adv Windows Prog\AdvWinPorgHW3\AdvWinPorgHW3\obj\Debug\AdvWinPorgHW3.pdb
+C:\Users\pieca\Documents\Adv Win Prog\AdvWinPorgHW3\AdvWinPorgHW3\bin\Debug\AdvWinPorgHW3.exe.config
+C:\Users\pieca\Documents\Adv Win Prog\AdvWinPorgHW3\AdvWinPorgHW3\obj\Debug\AdvWinPorgHW3.exe
+C:\Users\pieca\Documents\Adv Win Prog\AdvWinPorgHW3\AdvWinPorgHW3\obj\Debug\AdvWinPorgHW3.pdb
+C:\Users\pieca\Documents\Adv Win Prog\AdvWinPorgHW3\AdvWinPorgHW3\bin\Debug\AdvWinPorgHW3.exe
+C:\Users\pieca\Documents\Adv Win Prog\AdvWinPorgHW3\AdvWinPorgHW3\bin\Debug\AdvWinPorgHW3.pdb
+C:\Users\pieca\Documents\Adv Win Prog\AdvWinPorgHW3\AdvWinPorgHW3\obj\Debug\AdvWinPorgHW3.csprojResolveAssemblyReference.cache
+C:\Users\pieca\Documents\Adv Win Prog\AdvWinPorgHW3\AdvWinPorgHW3\obj\Debug\AdvWinPorgHW3.Form1.resources
+C:\Users\pieca\Documents\Adv Win Prog\AdvWinPorgHW3\AdvWinPorgHW3\obj\Debug\AdvWinPorgHW3.Properties.Resources.resources
+C:\Users\pieca\Documents\Adv Win Prog\AdvWinPorgHW3\AdvWinPorgHW3\obj\Debug\AdvWinPorgHW3.csproj.GenerateResource.Cache

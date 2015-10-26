@@ -14,6 +14,9 @@ namespace AdvWinPorgHW3
     {
         bool drawEllipse = false;
         bool drawLine = false;
+        Size offset = new Size(0, 0);
+        Bitmap bubs = new Bitmap(@"C:\Users\pieca\Documents\Adv Win Prog\AdvWinPorgHW3\AdvWinPorgHW3\Resources\hotline-miami-wallpaper.jpg");
+        int moveAmt = 40;
 
         public Form1()
         {
@@ -71,6 +74,38 @@ namespace AdvWinPorgHW3
                     //g.DrawRectangle(pen, new Rectangle(20, 20, this.ClientRectangle.Width - 40, this.ClientRectangle.Height - 40));
                 }
             }
+        }
+
+        private void tabPanning_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            Rectangle destRect = this.tabPanning.ClientRectangle;
+            Rectangle srcRect = new Rectangle(this.offset.Width, this.offset.Height, destRect.Width, destRect.Height);
+            g.DrawImage(this.bubs, destRect, srcRect, g.PageUnit);
+        }
+
+        private void buttonUp_Click(object sender, EventArgs e)
+        {
+            offset.Height -= moveAmt;
+            this.Invalidate(true);
+        }
+
+        private void buttonLeft_Click(object sender, EventArgs e)
+        {
+            offset.Width -= moveAmt;
+            this.Invalidate(true);
+        }
+
+        private void buttonDown_Click(object sender, EventArgs e)
+        {
+            offset.Height += moveAmt;
+            this.Invalidate(true);
+        }
+
+        private void buttonRight_Click(object sender, EventArgs e)
+        {
+            offset.Width += moveAmt;
+            this.Invalidate(true);
         }
     }
 }

@@ -70,7 +70,7 @@
             this.linearGradientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pathGradientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.newToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.solidPenToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.printToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -90,7 +90,7 @@
             this.buttonRight = new System.Windows.Forms.Button();
             this.buttonUp = new System.Windows.Forms.Button();
             this.buttonLeft = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelPanning = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -359,12 +359,14 @@
             this.customToolStripMenuItem.Name = "customToolStripMenuItem";
             this.customToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.customToolStripMenuItem.Text = "Custom";
+            this.customToolStripMenuItem.Click += new System.EventHandler(this.customToolStripMenuItem_Click);
             // 
             // compoundToolStripMenuItem
             // 
             this.compoundToolStripMenuItem.Name = "compoundToolStripMenuItem";
             this.compoundToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.compoundToolStripMenuItem.Text = "Compound";
+            this.compoundToolStripMenuItem.Click += new System.EventHandler(this.compoundToolStripMenuItem_Click);
             // 
             // brushItemsToolStripMenuItem
             // 
@@ -412,7 +414,7 @@
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newToolStripButton,
+            this.solidPenToolStripButton,
             this.openToolStripButton,
             this.saveToolStripButton,
             this.printToolStripButton,
@@ -428,14 +430,15 @@
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // newToolStripButton
+            // solidPenToolStripButton
             // 
-            this.newToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.newToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripButton.Image")));
-            this.newToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.newToolStripButton.Name = "newToolStripButton";
-            this.newToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.newToolStripButton.Text = "&New";
+            this.solidPenToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.solidPenToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("solidPenToolStripButton.Image")));
+            this.solidPenToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.solidPenToolStripButton.Name = "solidPenToolStripButton";
+            this.solidPenToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.solidPenToolStripButton.Text = "&Solid Pen";
+            this.solidPenToolStripButton.Click += new System.EventHandler(this.solidToolStripMenuItem_Click);
             // 
             // openToolStripButton
             // 
@@ -548,6 +551,8 @@
             this.tabPens.Text = "Pens";
             this.tabPens.UseVisualStyleBackColor = true;
             this.tabPens.Paint += new System.Windows.Forms.PaintEventHandler(this.tabPens_Paint);
+            this.tabPens.Enter += new System.EventHandler(this.tabPens_Enter);
+            this.tabPens.Leave += new System.EventHandler(this.tabPens_Leave);
             // 
             // tabBrushes
             // 
@@ -559,6 +564,8 @@
             this.tabBrushes.Text = "Bruches";
             this.tabBrushes.UseVisualStyleBackColor = true;
             this.tabBrushes.Paint += new System.Windows.Forms.PaintEventHandler(this.tabBrushes_Paint);
+            this.tabBrushes.Enter += new System.EventHandler(this.tabBrushes_Enter);
+            this.tabBrushes.Leave += new System.EventHandler(this.tabBrushes_Leave);
             // 
             // tabPanning
             // 
@@ -566,7 +573,7 @@
             this.tabPanning.Controls.Add(this.buttonRight);
             this.tabPanning.Controls.Add(this.buttonUp);
             this.tabPanning.Controls.Add(this.buttonLeft);
-            this.tabPanning.Controls.Add(this.panel1);
+            this.tabPanning.Controls.Add(this.panelPanning);
             this.tabPanning.Location = new System.Drawing.Point(4, 22);
             this.tabPanning.Name = "tabPanning";
             this.tabPanning.Padding = new System.Windows.Forms.Padding(3);
@@ -574,7 +581,9 @@
             this.tabPanning.TabIndex = 2;
             this.tabPanning.Text = "Panning";
             this.tabPanning.UseVisualStyleBackColor = true;
-            this.tabPanning.Paint += new System.Windows.Forms.PaintEventHandler(this.tabPanning_Paint);
+            this.tabPanning.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tabPanning_MouseDown);
+            this.tabPanning.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tabPanning_MouseMove);
+            this.tabPanning.MouseUp += new System.Windows.Forms.MouseEventHandler(this.tabPanning_MouseUp);
             // 
             // buttonDown
             // 
@@ -616,15 +625,19 @@
             this.buttonLeft.UseVisualStyleBackColor = true;
             this.buttonLeft.Click += new System.EventHandler(this.buttonLeft_Click);
             // 
-            // panel1
+            // panelPanning
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.panelPanning.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Location = new System.Drawing.Point(66, 60);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(387, 253);
-            this.panel1.TabIndex = 0;
+            this.panelPanning.Location = new System.Drawing.Point(66, 60);
+            this.panelPanning.Name = "panelPanning";
+            this.panelPanning.Size = new System.Drawing.Size(387, 253);
+            this.panelPanning.TabIndex = 0;
+            this.panelPanning.Paint += new System.Windows.Forms.PaintEventHandler(this.panelPanning_Paint);
+            this.panelPanning.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tabPanning_MouseDown);
+            this.panelPanning.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tabPanning_MouseMove);
+            this.panelPanning.MouseUp += new System.Windows.Forms.MouseEventHandler(this.tabPanning_MouseUp);
             // 
             // Form1
             // 
@@ -693,7 +706,7 @@
         private System.Windows.Forms.ToolStripMenuItem solidToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem customToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem compoundToolStripMenuItem;
-        private System.Windows.Forms.ToolStripButton newToolStripButton;
+        private System.Windows.Forms.ToolStripButton solidPenToolStripButton;
         private System.Windows.Forms.ToolStripButton openToolStripButton;
         private System.Windows.Forms.ToolStripButton saveToolStripButton;
         private System.Windows.Forms.ToolStripButton printToolStripButton;
@@ -714,7 +727,7 @@
         private System.Windows.Forms.Button buttonRight;
         private System.Windows.Forms.Button buttonUp;
         private System.Windows.Forms.Button buttonLeft;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelPanning;
     }
 }
 

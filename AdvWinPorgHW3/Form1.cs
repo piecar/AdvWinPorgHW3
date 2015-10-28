@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace AdvWinPorgHW3
         Point downPoint = Point.Empty;
         Size offset = new Size(0, 0);
         Bitmap bubs = Properties.Resources.kim_holtermand_reflections_1920x1200;
+        Bitmap wheel = Properties.Resources.Categories_preferences_system_icon;
         int moveAmt = 40;
         BufferedGraphicsContext bufferContext;
 
@@ -48,7 +50,7 @@ namespace AdvWinPorgHW3
                         g.DrawEllipse(myPen, this.ClientRectangle);
                     if(customToolStripMenuItem.Checked)
                     {
-                        myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;
+                        myPen.DashStyle = DashStyle.Custom;
                         myPen.DashPattern = new float[] { 1f, 1f, 6f, 1f, 3f, 1f };
                         g.DrawEllipse(myPen, this.ClientRectangle);
                     }
@@ -56,7 +58,7 @@ namespace AdvWinPorgHW3
                     {
                         myPen.Width = 20;
                         myPen.CompoundArray = new float[] { 0.0f, 0.10f, 0.35f, 0.60f, 0.85f, 1.0f, };
-                        g.DrawRectangle(myPen, new Rectangle(20, 20, this.ClientRectangle.Width - 40, this.ClientRectangle.Height - 150));
+                        g.DrawEllipse(myPen, new Rectangle(20, 20, this.ClientRectangle.Width - 40, this.ClientRectangle.Height - 150));
                     }
                 }
             }
@@ -71,6 +73,8 @@ namespace AdvWinPorgHW3
         private void solidToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             this.drawEllipse = !this.drawEllipse;
+            if (solidToolStripMenuItem1.Checked) solidToolStripMenuItem1.Checked = false;
+            else solidToolStripMenuItem1.Checked = true;
             this.Invalidate(true);
         }
         
@@ -79,12 +83,38 @@ namespace AdvWinPorgHW3
             if (!this.drawEllipse) return;
             else
             {
-                using (Brush myBrush = new SolidBrush(Color.DarkOrange))
-                {
-                    Graphics g = e.Graphics;
-
-                    g.FillEllipse(Brushes.DarkBlue, this.ClientRectangle);
-                }
+               
+                
+                    if(solidToolStripMenuItem1.Checked)
+                    {
+                        using (Brush myBrush = new SolidBrush(Color.DarkOrange))
+                        {
+                            Graphics g = e.Graphics;
+                            g.FillEllipse(myBrush, this.ClientRectangle);
+                        }
+                            
+                    }
+                    if(textureToolStripMenuItem.Checked)
+                    {
+                        using (Brush brush = new TextureBrush(wheel))
+                        {
+                            Graphics g = e.Graphics;
+                            g.FillEllipse(brush, this.ClientRectangle);
+                        }                            
+                    }
+                    if (linearGradientToolStripMenuItem.Checked)
+                    {
+                        using (LinearGradientBrush bbrush = 
+                            new LinearGradientBrush(this.ClientRectangle, Color.DarkGreen, Color.LightSkyBlue, 20.0f))
+                        {
+                            Graphics g = e.Graphics;
+                            ColorBlend myBlend= new ColorBlend();
+                            myBlend.Colors = new Color[] { Color.DarkGreen, Color.Maroon, Color.LightSkyBlue };
+                            myBlend.Positions = new float[] { 0.0f, 0.50f, 1.0f };
+                            bbrush.InterpolationColors = myBlend;
+                            g.FillEllipse(bbrush, this.ClientRectangle);
+                        }  
+                     }
             }
         }
 
@@ -118,9 +148,16 @@ namespace AdvWinPorgHW3
         private void panelPanning_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            Rectangle destRect = this.panelPanning.ClientRectangle;
-            Rectangle srcRect = new Rectangle(this.offset.Width, this.offset.Height, destRect.Width, destRect.Height);
-            g.DrawImage(this.bubs, destRect, srcRect, g.PageUnit);
+            using (BufferedGraphics frame = bufferContext.Allocate(g, this.panelPanning.ClientRectangle))
+            {
+                Rectangle destRect = this.panelPanning.ClientRectangle;
+                Rectangle srcRect = new Rectangle(this.offset.Width, this.offset.Height, destRect.Width, destRect.Height);
+                frame.Graphics.DrawImage(this.bubs, destRect, srcRect, g.PageUnit);
+                frame.Render();
+            }
+            //Rectangle destRect = this.panelPanning.ClientRectangle;
+            //Rectangle srcRect = new Rectangle(this.offset.Width, this.offset.Height, destRect.Width, destRect.Height);
+            //g.DrawImage(this.bubs, destRect, srcRect, g.PageUnit);
         }
 
         private void tabPens_Leave(object sender, EventArgs e)
@@ -180,6 +217,22 @@ namespace AdvWinPorgHW3
         {
             if (e.Button != MouseButtons.Left) return;
             downPoint = Point.Empty;
+        }
+
+        private void textureToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.drawEllipse = !this.drawEllipse;
+            if (textureToolStripMenuItem.Checked) textureToolStripMenuItem.Checked = false;
+            else textureToolStripMenuItem.Checked = true;
+            this.Invalidate(true);
+        }
+
+        private void linearGradientToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.drawEllipse = !this.drawEllipse;
+            if (linearGradientToolStripMenuItem.Checked) linearGradientToolStripMenuItem.Checked = false;
+            else linearGradientToolStripMenuItem.Checked = true;
+            this.Invalidate(true);
         }
     }
 }

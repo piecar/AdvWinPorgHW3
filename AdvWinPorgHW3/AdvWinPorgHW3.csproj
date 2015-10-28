@@ -86,6 +86,9 @@
   <ItemGroup>
     <None Include="Resources\kim-holtermand-reflections-1920x1200.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Categories-preferences-system-icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

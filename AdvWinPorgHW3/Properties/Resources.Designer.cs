@@ -63,6 +63,16 @@ namespace AdvWinPorgHW3.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Categories_preferences_system_icon {
+            get {
+                object obj = ResourceManager.GetObject("Categories_preferences_system_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap kim_holtermand_reflections_1920x1200 {
             get {
                 object obj = ResourceManager.GetObject("kim_holtermand_reflections_1920x1200", resourceCulture);
